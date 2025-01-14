@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',  
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -114,14 +115,14 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
+#  https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR / "static")]
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = [os.path.join(BASE_DIR / "media")]
+MEDIA_ROOT = BASE_DIR / "media"
 
 
 
@@ -129,3 +130,31 @@ MEDIA_ROOT = [os.path.join(BASE_DIR / "media")]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+JAZZMIN_SETTINGS = {
+    "site_title": "My Dashboard",
+    "site_header": "Feane",
+    "site_brand": "Admin Dashboard",
+    "site_logo": "images/favicon.png",  # Add your logo here
+    "login_logo": "images/favicon.png",   # Logo for login page
+    "welcome_sign": "Welcome to the Admin Dashboard!",
+    "custom_css": "css/custom.css", 
+    "copyright": "Feane © 2025",
+    "show_sidebar": True,
+    "search_model": "your_app.Order",
+    "topmenu_links": [
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Orders", "url": "/admin/app/order/", "permissions": ["app.view_order"]},
+        {"name": "Logout", "url": "admin:logout"},
+    ],
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "app.Order": "fas fa-receipt",
+    },
+    "order_with_respect_to": ["auth", "app.Order"],
+    "navigation_expanded": True,
+}
+

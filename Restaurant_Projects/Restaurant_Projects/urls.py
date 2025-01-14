@@ -19,14 +19,17 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from Base_App.views import *
+from Base_App.views import order_now
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',HomeView),
-    path('/book_table',BookTableView),
-    path('/menu',MenuView),
-    path('/about',AboutView),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
+    path('',HomeView,name="Home"),
+    path('book_table',BookTableView,name="Book_Table"),
+    path('menu',MenuView,name="Menu"),
+    path('about',AboutView,name="About"),
+    path('order-now/', order_now, name='order_now'),
+    path('order-success/<int:order_id>/',order_success, name='order_success'),
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
